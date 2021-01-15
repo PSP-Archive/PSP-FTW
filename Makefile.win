@@ -1,0 +1,37 @@
+# Project: pspftw2d
+# Compiler: Default GCC compiler
+# Compiler Type: MingW 3
+# Makefile created by wxDev-C++ 7.3 on 01/06/11 12:32
+
+WXLIBNAME = wxmsw28
+CPP       = g++.exe
+CC        = gcc.exe
+WINDRES   = "windres.exe"
+OBJ       = MingW/main.o MingW/pspftw2d_private.res
+LINKOBJ   = "MingW/main.o" MingW/pspftw2d_private.res
+LIBS      = -L"C:/Program Files/Dev-Cpp/Lib" -lmingw32 -lSDLmain  -lSDL_ttf -lSDL_image -ljpeg -lpng -lz -lSDL -liberty -lws2_32  
+INCS      = -I"C:/Program Files/Dev-Cpp/Include"
+CXXINCS   = -I"C:/Program Files/Dev-Cpp/lib/gcc/mingw32/3.4.5/include" -I"C:/Program Files/Dev-Cpp/include/c++/3.4.5/backward" -I"C:/Program Files/Dev-Cpp/include/c++/3.4.5/mingw32" -I"C:/Program Files/Dev-Cpp/include/c++/3.4.5" -I"C:/Program Files/Dev-Cpp/include" -I"C:/Program Files/Dev-Cpp/" -I"C:/Program Files/Dev-Cpp/include/3rdparty/wx/plotctrl" -I"C:/Program Files/Dev-Cpp/include/3rdparty/wx/sheet" -I"C:/Program Files/Dev-Cpp/include/3rdparty/wx/treemultictrl" -I"C:/Program Files/Dev-Cpp/include/3rdparty/wx/things" -I"C:/Program Files/Dev-Cpp/include/3rdparty/wx" -I"C:/Program Files/Dev-Cpp/include/3rdparty" -I"C:/Program Files/Dev-Cpp/include/common/wx/msw" -I"C:/Program Files/Dev-Cpp/include/common/wx/generic" -I"C:/Program Files/Dev-Cpp/include/common/wx/fl" -I"C:/Program Files/Dev-Cpp/include/common/wx/gizmos" -I"C:/Program Files/Dev-Cpp/include/common/wx/html" -I"C:/Program Files/Dev-Cpp/include/common/wx/mmedia" -I"C:/Program Files/Dev-Cpp/include/common/wx/net" -I"C:/Program Files/Dev-Cpp/include/common/wx/ogl" -I"C:/Program Files/Dev-Cpp/include/common/wx/plot" -I"C:/Program Files/Dev-Cpp/include/common/wx/protocol" -I"C:/Program Files/Dev-Cpp/include/common/wx/stc" -I"C:/Program Files/Dev-Cpp/include/common/wx/svg" -I"C:/Program Files/Dev-Cpp/include/common/wx/xml" -I"C:/Program Files/Dev-Cpp/include/common/wx/xrc" -I"C:/Program Files/Dev-Cpp/include/common/wx" -I"C:/Program Files/Dev-Cpp/include/common"
+RCINCS    = --include-dir "C:/PROGRA~1/Dev-Cpp/include/common"
+BIN       = MingW/pspftw2d.exe
+DEFINES   = 
+CXXFLAGS  = $(CXXINCS) $(DEFINES)  
+CFLAGS    = $(INCS) $(DEFINES) -I"C:\Program Files\Dev-Cpp\\include\SDL" -Dmain=SDL_main  
+GPROF     = gprof.exe
+RM        = rm -f
+LINK      = g++.exe
+
+.PHONY: all all-before all-after clean clean-custom
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	$(RM) $(LINKOBJ) "$(BIN)"
+
+$(BIN): $(OBJ)
+	$(LINK) $(LINKOBJ) -o "$(BIN)" $(LIBS) 
+
+MingW/main.o: $(GLOBALDEPS) main.c
+	$(CC) -c main.c -o MingW/main.o $(CFLAGS)
+
+MingW/pspftw2d_private.res: MingW/pspftw2d_private.rc 
+	$(WINDRES) --input-format=rc -o MingW/pspftw2d_private.res $(RCINCS) MingW/PSPFTW~1.RC -O coff

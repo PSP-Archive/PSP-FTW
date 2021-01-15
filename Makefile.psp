@@ -1,0 +1,56 @@
+TARGET = pspftw2d
+OBJS = main.o 3xx.o network.o osk.o
+
+CFLAGS = -g -O2 -G0 -Wall -I/opt/pspsdk/psp/include -Dmain=SDL_main
+#CFLAGS = -g -O2 -G0 -Wall
+CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
+ASFLAGS = $(CFLAGS)
+
+LIBDIR =
+LIBS = -L/opt/pspsdk/psp/lib -L/opt/pspsdk/psp/sdk/lib \
+	-lstdc++ -lpsprtc \
+	-lSDL_ttf -lfreetype \
+	-lSDL_image -ljpeg -lpng -lz \
+	-lSDL -lGL -lm \
+	-lpsprtc -lpspvfpu -lpspgu -lpspirkeyb -lpsppower \
+	-lpspaudiolib -lpspaudio -lpsphprm
+#-lSDL_mixer -lSDL_ttf -lSDLmain   -lfreetype -lvorbisenc -lvorbisfile -lvorbis -logg 
+LDFLAGS = -g
+
+PSP_FW_VERSION=200
+BUILD_PRX=1
+
+EXTRA_TARGETS = EBOOT.PBP
+PSP_EBOOT_TITLE = PSP FTW! 2D
+PSP_EBOOT_ICON = icon0.png
+#PSP_EBOOT_PIC1 = pic1.png
+#PSP_EBOOT_SND0 = snd0.at3
+
+PSPSDK=$(shell psp-config --pspsdk-path)
+PSPBIN = $(PSPSDK)/../bin
+#CFLAGS += $(shell $(PSPBIN)/sdl-config --cflags)
+#LIBS += $(shell $(PSPBIN)/sdl-config --libs)
+include $(PSPSDK)/lib/build.mak
+
+dist: EBOOT.PBP readme.txt Makefile
+	-rm -rf dist
+	mkdir dist
+	mkdir dist/$(TARGET)
+	mkdir dist/src
+	cp -p *.[ch]* Makefile* dist/src/.
+	-cp -p icon*.png dist/src/.
+	-cp -p pic*.png dist/src/.
+	-cp -p snd*.at3 dist/src/.
+	cp -p readme.txt license.txt dist/.
+	cp -p EBOOT.PBP dist/$(TARGET)
+	cp -p *.ttf dist/$(TARGET)
+	mkdir dist/$(TARGET)/data
+	mkdir dist/$(TARGET)/data/sprites
+	-cp -p data/* dist/$(TARGET)/data
+	-cp -p data/sprites/* dist/$(TARGET)/data/sprites
+	-rm dist/$(TARGET)/data/hiscore.txt
+	-rm dist/$(TARGET)/data/options
+	-rm $(TARGET)dist.zip 
+	(cd dist; zip -r ../$(TARGET)dist.zip .)
+
+
